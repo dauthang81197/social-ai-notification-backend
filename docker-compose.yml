@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    image: dauthang811/social-ai-notification-backend:latest
+    environment:
+      NODE_ENV: ${ENV}
+    ports:
+      - "8000:8000"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    configs:
+      - source: social-ai-notification-backend-dev
+        target: /app/.env
+    networks:
+      - app-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+configs:
+  social-ai-backend-dev:
+    external: true  # Sử dụng config đã tạo bên ngoài
+
+networks:
+  app-net:
+    external: true  # Mạng external đã được tạo từ trước
