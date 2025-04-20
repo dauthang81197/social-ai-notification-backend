@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /social-ai-notification-backend
 
 COPY ./dist ./dist
 COPY package.json .
