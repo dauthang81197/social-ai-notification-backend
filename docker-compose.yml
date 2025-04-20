@@ -25,7 +25,7 @@ services:
         max-file: "3"
 
 configs:
-  social-ai-backend-dev:
+  social-ai-notification-backend-dev:
     external: true  # Sử dụng config đã tạo bên ngoài
 
 networks:
