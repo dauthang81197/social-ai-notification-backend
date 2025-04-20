@@ -90,18 +90,3 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/social-ai-notification-backend:latest
 
             docker stack deploy -c docker-compose.yml social-ai-notification-backend-stack
-
-      - name: Notify Telegram on Success
-        if: success()
-        run: |
-          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d text="✅ CI/CD Build & Deploy thành công trên Docker Swarm! 🚀 (Branch: develop)"
-
-      - name: Notify Telegram on Failure
-        if: failure()
-        run: |
-          curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage \
-            --data-urlencode text="❌ *Build hoặc Deploy thất bại trong job:* \`${{ github.job }}\` trên branch `develop` 🚨" \
-            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-            -d parse_mode=Markdown
